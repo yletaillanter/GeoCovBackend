@@ -8,6 +8,12 @@ import java.util.List;
  */
 @Entity
 @Table(name = "adresse")
+@NamedQueries({
+        @NamedQuery(
+                name = "Adresse.findAll",
+                query = "SELECT a FROM Adresse a"
+        )
+})
 public class Adresse {
 
     private long id;

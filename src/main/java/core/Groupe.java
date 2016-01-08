@@ -6,6 +6,14 @@ import java.util.List;
 /**
  * Created by tidus on 08/01/2016.
  */
+@Entity
+@Table(name = "groupe")
+@NamedQueries({
+        @NamedQuery(
+                name = "Groupe.findAll",
+                query = "SELECT g FROM Groupe g"
+        )
+})
 public class Groupe {
 
     private long id;

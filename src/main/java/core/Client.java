@@ -9,6 +9,12 @@ import javax.print.StreamPrintService;
 
 @Entity
 @Table(name = "client")
+@NamedQueries({
+        @NamedQuery(
+                name = "Client.findAll",
+                query = "SELECT c FROM Client c"
+        )
+})
 public class Client {
 
     private long id;
