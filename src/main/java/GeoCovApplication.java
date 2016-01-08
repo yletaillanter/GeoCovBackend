@@ -7,8 +7,13 @@ import io.dropwizard.Application;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.db.PooledDataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
+import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import org.skife.jdbi.v2.DBI;
+import resources.AdresseResource;
+import resources.ClientResource;
+import resources.GroupeResource;
 import resources.HelloWorldResource;
 
 /**
@@ -33,30 +38,35 @@ public class GeoCovApplication extends Application<GeoCovConfiguration> {
 
     @Override
     public String getName() {
-        return "hello-world";
+        return "geo-cov";
     }
 
     @Override
     public void initialize(Bootstrap<GeoCovConfiguration> bootstrap) {
-        // nothing to do yet
         bootstrap.addBundle(hibernateBundle);
     }
 
     @Override
     public void run(GeoCovConfiguration geoCovConfiguration, Environment environment) throws Exception {
-        final AdresseDAO adao = new AdresseDAO(hibernateBundle.getSessionFactory());
-        final ClientDAO cdao = new ClientDAO(hibernateBundle.getSessionFactory());
-        final GroupeDAO gdao = new GroupeDAO(hibernateBundle.getSessionFactory());
+        // Init DB
+        final DBIFactory factory = new DBIFactory();
+        final DBI jdbi = factory.build(environment, geoCovConfiguration.getDataSourceFactory(), "mysql");
 
-        final HelloWorldResource resource = new HelloWorldResource(
-                geoCovConfiguration.getTemplate(),
-                geoCovConfiguration.getDefaultName()
-        );
-        environment.jersey().register(resource);
+        // Add client Ressources
+        final ClientDAO cdao = jdbi.onDemand(ClientDAO.class);
+        environment.jersey().register(new ClientResource(cdao));
+
+        // Add groupe Ressources
+        final AdresseDAO adao = jdbi.onDemand(AdresseDAO.class);
+        environment.jersey().register(new AdresseResource(adao));
+
+        // Add groupe Ressources
+        final GroupeDAO gdao = jdbi.onDemand(GroupeDAO.class);
+        environment.jersey().register(new GroupeResource(gdao));
+
 
         final TemplateHealthCheck healthCheck =
                 new TemplateHealthCheck(geoCovConfiguration.getTemplate());
         environment.healthChecks().register("template", healthCheck);
-        environment.jersey().register(resource);
     }
 }

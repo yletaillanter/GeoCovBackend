@@ -6,6 +6,7 @@ package core;
 
 import javax.persistence.*;
 import javax.print.StreamPrintService;
+import java.util.List;
 
 @Entity
 @Table(name = "client")
@@ -23,19 +24,17 @@ public class Client {
     private String email;
     private String mdp;
     private String telephone;
-    private Adresse domicile;
-    private Adresse travail;
+    private List<Adresse> adresses;
     private int distanceMax;
     private Groupe groupe;
 
-    public Client(String prenom, String nom, String email, String mdp, String telephone, Adresse domicile, Adresse travail) {
+    public Client(String prenom, String nom, String email, String mdp, String telephone, List<Adresse> adresses) {
         this.prenom = prenom;
         this.nom = nom;
         this.email = email;
         this.mdp = mdp;
         this.telephone = telephone;
-        this.domicile = domicile;
-        this.travail = travail;
+        this.adresses = adresses;
     }
 
     public Client() {}
@@ -95,20 +94,13 @@ public class Client {
         this.telephone = telephone;
     }
 
-    public Adresse getDomicile() {
-        return domicile;
+    @ManyToMany
+    public List<Adresse> getAdresses() {
+        return adresses;
     }
 
-    public void setDomicile(Adresse domicile) {
-        this.domicile = domicile;
-    }
-
-    public Adresse getTravail() {
-        return travail;
-    }
-
-    public void setTravail(Adresse travail) {
-        this.travail = travail;
+    public void setAdresses(List<Adresse> adresses) {
+        this.adresses = adresses;
     }
 
     public int getDistanceMax() {
