@@ -100,7 +100,7 @@ public class Adresse {
         this.longitude = longitude;
     }
 
-    @ManyToMany
+    @ManyToMany(mappedBy="adresses")
     public List<Client> getClients() {
         return clients;
     }

@@ -95,6 +95,7 @@ public class Client {
     }
 
     @ManyToMany
+    @JoinTable(name="client_adresse")
     public List<Adresse> getAdresses() {
         return adresses;
     }
