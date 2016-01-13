@@ -1,4 +1,6 @@
+import core.Adresse;
 import core.Client;
+import core.Groupe;
 import db.AdresseDAO;
 import db.ClientDAO;
 import db.GroupeDAO;
@@ -28,8 +30,9 @@ public class GeoCovApplication extends Application<GeoCovConfiguration> {
     /**
      * TODO : Mieux gérer les différents DAO
      */
+
     private final HibernateBundle<GeoCovConfiguration> hibernateBundle =
-            new HibernateBundle<GeoCovConfiguration>(Client.class) {
+            new HibernateBundle<GeoCovConfiguration>(Client.class, Groupe.class, Adresse.class) {
                 @Override
                 public DataSourceFactory getDataSourceFactory(GeoCovConfiguration configuration) {
                     return configuration.getDataSourceFactory();
@@ -53,15 +56,15 @@ public class GeoCovApplication extends Application<GeoCovConfiguration> {
         final DBI jdbi = factory.build(environment, geoCovConfiguration.getDataSourceFactory(), "mysql");
 
         // Add client Ressources
-        final ClientDAO cdao = jdbi.onDemand(ClientDAO.class);
+        final ClientDAO cdao = new ClientDAO(hibernateBundle.getSessionFactory());
         environment.jersey().register(new ClientResource(cdao));
 
         // Add groupe Ressources
-        final AdresseDAO adao = jdbi.onDemand(AdresseDAO.class);
+        final AdresseDAO adao = new AdresseDAO(hibernateBundle.getSessionFactory());
         environment.jersey().register(new AdresseResource(adao));
 
         // Add groupe Ressources
-        final GroupeDAO gdao = jdbi.onDemand(GroupeDAO.class);
+        final GroupeDAO gdao = new GroupeDAO(hibernateBundle.getSessionFactory());
         environment.jersey().register(new GroupeResource(gdao));
 
 

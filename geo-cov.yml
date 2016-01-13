@@ -11,7 +11,7 @@ database:
   user: root
 
   # the password
-  password: root
+  password:
 
   # the JDBC URL
   url: jdbc:mysql://localhost/geocov
