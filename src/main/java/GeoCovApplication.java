@@ -10,6 +10,7 @@ import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.db.PooledDataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.jdbi.DBIFactory;
+import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import org.skife.jdbi.v2.DBI;
@@ -18,19 +19,16 @@ import resources.ClientResource;
 import resources.GroupeResource;
 import resources.HelloWorldResource;
 
+import javax.xml.crypto.Data;
+
 /**
  * Created by yoannlt on 06/01/2016.
  */
 public class GeoCovApplication extends Application<GeoCovConfiguration> {
 
-    public static void main(String[] args) throws Exception {
-        new GeoCovApplication().run(args);
-    }
-
     /**
-     * TODO : Mieux gérer les différents DAO
+     *  Init Hibernate Bundle
      */
-
     private final HibernateBundle<GeoCovConfiguration> hibernateBundle =
             new HibernateBundle<GeoCovConfiguration>(Client.class, Groupe.class, Adresse.class) {
                 @Override
@@ -38,6 +36,21 @@ public class GeoCovApplication extends Application<GeoCovConfiguration> {
                     return configuration.getDataSourceFactory();
                 }
             };
+
+    /**
+     *  Init Migration Bundle
+     */
+    private final MigrationsBundle<GeoCovConfiguration> migrationsBundle =
+            new MigrationsBundle<GeoCovConfiguration>() {
+                @Override
+                public DataSourceFactory getDataSourceFactory(GeoCovConfiguration conf) {
+                    return conf.getDataSourceFactory();
+                }
+            };
+
+    public static void main(String[] args) throws Exception {
+        new GeoCovApplication().run(args);
+    }
 
     @Override
     public String getName() {
@@ -47,6 +60,7 @@ public class GeoCovApplication extends Application<GeoCovConfiguration> {
     @Override
     public void initialize(Bootstrap<GeoCovConfiguration> bootstrap) {
         bootstrap.addBundle(hibernateBundle);
+        bootstrap.addBundle(migrationsBundle);
     }
 
     @Override

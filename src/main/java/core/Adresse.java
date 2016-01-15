@@ -82,7 +82,6 @@ public class Adresse {
         this.ville = ville;
     }
 
-    @Column(nullable = false)
     public String getLatitude() {
         return latitude;
     }
@@ -91,7 +90,6 @@ public class Adresse {
         this.latitude = latitude;
     }
 
-    @Column(nullable = false)
     public String getLongitude() {
         return longitude;
     }
