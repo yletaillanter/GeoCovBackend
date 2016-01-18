@@ -7,7 +7,6 @@ import db.GroupeDAO;
 import health.TemplateHealthCheck;
 import io.dropwizard.Application;
 import io.dropwizard.db.DataSourceFactory;
-import io.dropwizard.db.PooledDataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.migrations.MigrationsBundle;
@@ -17,9 +16,9 @@ import org.skife.jdbi.v2.DBI;
 import resources.AdresseResource;
 import resources.ClientResource;
 import resources.GroupeResource;
-import resources.HelloWorldResource;
 
-import javax.xml.crypto.Data;
+import org.glassfish.jersey.media.multipart.FormDataParam;
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 
 /**
  * Created by yoannlt on 06/01/2016.
@@ -61,6 +60,7 @@ public class GeoCovApplication extends Application<GeoCovConfiguration> {
     public void initialize(Bootstrap<GeoCovConfiguration> bootstrap) {
         bootstrap.addBundle(hibernateBundle);
         bootstrap.addBundle(migrationsBundle);
+        //bootstrap.addBundle(new MultiPartBundle());
     }
 
     @Override
@@ -80,7 +80,6 @@ public class GeoCovApplication extends Application<GeoCovConfiguration> {
         // Add groupe Ressources
         final GroupeDAO gdao = new GroupeDAO(hibernateBundle.getSessionFactory());
         environment.jersey().register(new GroupeResource(gdao));
-
 
         final TemplateHealthCheck healthCheck =
                 new TemplateHealthCheck(geoCovConfiguration.getTemplate());
