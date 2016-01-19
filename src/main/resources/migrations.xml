@@ -24,19 +24,19 @@
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="prenom" type="VARCHAR(255)">
+            <column name="name" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="nom" type="VARCHAR(255)">
+            <column name="lastname" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="email" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="mdp" type="VARCHAR(255)">
+            <column name="password" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="telephone" type="VARCHAR(255)">
+            <column name="phone" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="distanceMax" type="INT"/>

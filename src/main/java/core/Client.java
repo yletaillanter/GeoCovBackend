@@ -4,10 +4,7 @@ package core;
  * Created by jeremy on 08/01/2016.
  */
 
-import org.hibernate.annotations.Cascade;
-
 import javax.persistence.*;
-import javax.print.StreamPrintService;
 import java.util.List;
 
 @Entity
@@ -25,22 +22,21 @@ import java.util.List;
 public class Client {
 
     private long id;
-    private String prenom;
-    private String nom;
+    private String name;
+    private String lastname;
     private String email;
-    private String mdp;
-    private String telephone;
+    private String password;
+    private String phone;
     private List<Adresse> adresses;
     private int distanceMax;
     private Groupe groupe;
 
-    public Client(String prenom, String nom, String email, String mdp, String telephone, List<Adresse> adresses) {
-        this.prenom = prenom;
-        this.nom = nom;
+    public Client(String name, String lastname, String email, String password, String phone) {
+        this.name = name;
+        this.lastname = lastname;
         this.email = email;
-        this.mdp = mdp;
-        this.telephone = telephone;
-        this.adresses = adresses;
+        this.password = password;
+        this.phone = phone;
     }
 
     public Client() {}
@@ -56,21 +52,21 @@ public class Client {
     }
 
     @Column(nullable = false)
-    public String getPrenom() {
-        return prenom;
+    public String getName() {
+        return name;
     }
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Column(nullable = false)
-    public String getNom() {
-        return nom;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     @Column(nullable = false)
@@ -83,21 +79,21 @@ public class Client {
     }
 
     @Column(nullable = false)
-    public String getMdp() {
-        return mdp;
+    public String getPassword() {
+        return password;
     }
 
-    public void setMdp(String mdp) {
-        this.mdp = mdp;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Column(nullable = false)
-    public String getTelephone() {
-        return telephone;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     @ManyToMany(cascade = CascadeType.ALL)

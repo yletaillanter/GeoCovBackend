@@ -42,11 +42,11 @@ public class AdresseResource {
     @UnitOfWork
     public Adresse addAdresse(Adresse adresse) {
         //TODO verify if adress already exist
-        if (dao.isExist(adresse)) {
+       /* if (dao.isExist(adresse)) {
             return adresse;
-        } else {
+        } else {*/
             Adresse newAdresse = dao.create(adresse);
             return newAdresse;
-        }
+        //}
     }
 }

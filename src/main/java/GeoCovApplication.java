@@ -18,9 +18,6 @@ import resources.AdresseResource;
 import resources.ClientResource;
 import resources.GroupeResource;
 
-import org.glassfish.jersey.media.multipart.FormDataParam;
-import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
-
 import javax.servlet.DispatcherType;
 import javax.servlet.FilterRegistration;
 import java.util.EnumSet;

@@ -15,6 +15,7 @@ import java.util.List;
  * Created by yoannlt on 07/01/2016.
  */
 @Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 @Path("/client")
 public class ClientResource {
 
@@ -37,6 +38,19 @@ public class ClientResource {
         return dao.findById(id);
     }
 
+    @POST
+    @UnitOfWork
+    public Client addClient(Client client) {
+        //Check if email already exist
+        if (checkEmail(client.getEmail())) {
+            Client client1 = new Client();
+            return client1;
+        } else {
+            Client clientCreated = dao.create(client);
+            return clientCreated;
+        }
+    }
+
     @GET
     @Path("/checkEmail/{email}")
     @UnitOfWork
@@ -50,7 +64,6 @@ public class ClientResource {
             return true;
         }
     }
-
 
     // For test purpose
     @GET
@@ -81,13 +94,7 @@ public class ClientResource {
         adresses.add(adresse2);
 
         // Client
-        Client client1 = new Client("Julie", "Guégnaud", "julie.guegnaud@etudiant.univ-rennes1.fr", "gateau", "0675456342", adresses);
+        Client client1 = new Client("Julie", "Guégnaud", "julie.guegnaud@etudiant.univ-rennes1.fr", "gateau", "0675456342");
         addClient(client1);
-    }
-
-    @POST
-    public Client addClient(Client client) {
-        Client newClient = dao.create(client);
-        return newClient;
     }
 }

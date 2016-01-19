@@ -28,6 +28,6 @@ public class AdresseDAO extends AbstractDAO<Adresse> {
     }
 
     public Boolean isExist(Adresse adresse) {
-
+        return null;
     }
 }
