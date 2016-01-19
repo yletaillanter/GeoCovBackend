@@ -51,6 +51,8 @@ public class ClientResource {
         }
     }
 
+
+    // For test purpose
     @GET
     @Path("/addDummyclient")
     @UnitOfWork
