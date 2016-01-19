@@ -4,6 +4,8 @@ package core;
  * Created by jeremy on 08/01/2016.
  */
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import javax.print.StreamPrintService;
 import java.util.List;
@@ -98,7 +100,7 @@ public class Client {
         this.telephone = telephone;
     }
 
-    @ManyToMany
+    @ManyToMany (cascade = {CascadeType.ALL})
     @JoinTable(name="client_adresse")
     public List<Adresse> getAdresses() {
         return adresses;
