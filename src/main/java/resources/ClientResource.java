@@ -59,7 +59,7 @@ public class ClientResource {
     public void addDummyClients() {
         // Adresse 1
         Adresse adresse1 = new Adresse();
-        adresse1.setNumero(263);
+        adresse1.setNumero("263");
         adresse1.setRue("Avenue du Général Leclerc");
         adresse1.setCp("35000");
         adresse1.setVille("Rennes");
@@ -68,7 +68,7 @@ public class ClientResource {
 
         // Adresse 2
         Adresse adresse2 = new Adresse();
-        adresse2.setNumero(1);
+        adresse2.setNumero("1");
         adresse2.setRue("rue du père Grignon");
         adresse2.setCp("35000");
         adresse2.setVille("Rennes");

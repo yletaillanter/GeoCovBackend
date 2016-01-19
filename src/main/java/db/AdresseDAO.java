@@ -26,4 +26,8 @@ public class AdresseDAO extends AbstractDAO<Adresse> {
     public List<Adresse> findAll() {
         return list(namedQuery("Adresse.findAll"));
     }
+
+    public Boolean isExist(Adresse adresse) {
+
+    }
 }

@@ -12,12 +12,16 @@ import java.util.List;
         @NamedQuery(
                 name = "Adresse.findAll",
                 query = "SELECT a FROM Adresse a"
+        ),
+        @NamedQuery(
+        name = "Adresse.isExist",
+        query = "SELECT a FROM Adresse a"
         )
 })
 public class Adresse {
 
     private long id;
-    private int numero;
+    private String numero;
     private String rue;
     private String cp;
     private String ville;
@@ -27,8 +31,7 @@ public class Adresse {
 
     public Adresse() {}
 
-    public Adresse(int numero, String rue, String cp, String ville, List clients) {
-
+    public Adresse(String numero, String rue, String cp, String ville) {
         this.numero = numero;
         this.rue = rue;
         this.cp = cp;
@@ -46,11 +49,11 @@ public class Adresse {
     }
 
     @Column(nullable = false)
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 
