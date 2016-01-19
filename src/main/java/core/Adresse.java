@@ -33,7 +33,6 @@ public class Adresse {
         this.rue = rue;
         this.cp = cp;
         this.ville = ville;
-        this.clients = clients;
     }
 
     @Id
