@@ -41,7 +41,7 @@ public class ClientResource {
     @Path("/checkEmail/{email}")
     @UnitOfWork
     public Boolean checkEmail(@PathParam("email") String email) {
-        Optional<Client> client = dao.findByEmail(email);
+        Client client = dao.findByEmail(email);
 
         if(client == null){
             return false;
@@ -82,12 +82,6 @@ public class ClientResource {
 
         // Client
         Client client1 = new Client("Julie", "Guégnaud", "julie.guegnaud@etudiant.univ-rennes1.fr", "gateau", "0675456342", adresses);
-
-        // List des clients
-        List<Client> clients = new ArrayList<Client>();
-        clients.add(client1);
-
-        // On ajoute le clients à la base
         addClient(client1);
     }
 

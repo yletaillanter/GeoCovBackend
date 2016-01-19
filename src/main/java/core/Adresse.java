@@ -98,7 +98,7 @@ public class Adresse {
         this.longitude = longitude;
     }
 
-    @ManyToMany(mappedBy="adresses",cascade = {CascadeType.ALL})
+    @ManyToMany(mappedBy="adresses")
     public List<Client> getClients() {
         return clients;
     }

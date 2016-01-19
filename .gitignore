@@ -4,6 +4,8 @@
 ### Java ###
 *.class
 
+geo-cov.local.yml
+
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 

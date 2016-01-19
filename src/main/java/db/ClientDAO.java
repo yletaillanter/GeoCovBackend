@@ -28,9 +28,13 @@ public class ClientDAO extends AbstractDAO<Client> {
         return list(namedQuery("Client.findAll"));
     }
 
-    public Optional<Client> findByEmail(String email) {
+    public Client findByEmail(String email) {
         Query q = namedQuery("Client.findByEmail");
         q.setString("email", email);
-        return (Optional<Client>)q.uniqueResult();
+        if (q.uniqueResult() != null) {
+            return (Client) q.uniqueResult();
+        } else {
+            return null;
+        }
     }
 }

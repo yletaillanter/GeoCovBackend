@@ -100,7 +100,7 @@ public class Client {
         this.telephone = telephone;
     }
 
-    @ManyToMany (cascade = {CascadeType.ALL})
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name="client_adresse")
     public List<Adresse> getAdresses() {
         return adresses;
