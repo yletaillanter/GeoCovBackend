@@ -5,6 +5,7 @@ import core.Adresse;
 import core.Client;
 import db.AdresseDAO;
 import db.ClientDAO;
+import io.dropwizard.hibernate.UnitOfWork;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -14,6 +15,7 @@ import java.util.List;
  * Created by yoannlt on 07/01/2016.
  */
 @Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 @Path("/adresse")
 public class AdresseResource {
 
@@ -37,8 +39,14 @@ public class AdresseResource {
     }
 
     @POST
+    @UnitOfWork
     public Adresse addAdresse(Adresse adresse) {
-        Adresse newAdresse = dao.create(adresse);
-        return newAdresse;
+        //TODO verify if adress already exist
+        if (dao.isExist(adresse)) {
+            return adresse;
+        } else {
+            Adresse newAdresse = dao.create(adresse);
+            return newAdresse;
+        }
     }
 }
