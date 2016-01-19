@@ -12,13 +12,11 @@ import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import io.dropwizard.;
 import org.skife.jdbi.v2.DBI;
 import resources.AdresseResource;
 import resources.ClientResource;
 import resources.GroupeResource;
-
-import org.glassfish.jersey.media.multipart.FormDataParam;
-import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 
 /**
  * Created by yoannlt on 06/01/2016.
