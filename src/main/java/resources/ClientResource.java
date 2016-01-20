@@ -8,14 +8,15 @@ import io.dropwizard.hibernate.UnitOfWork;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by yoannlt on 07/01/2016.
  */
-@Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.TEXT_PLAIN)
 @Path("/client")
 public class ClientResource {
 
@@ -26,7 +27,6 @@ public class ClientResource {
     }
 
     @GET
-    @Path("/all")
     @Produces("application/json")
     public List<Client> getAll() {
         return dao.findAll();
@@ -40,14 +40,13 @@ public class ClientResource {
 
     @POST
     @UnitOfWork
-    public Client addClient(Client client) {
+    public Response addClient(Client client) {
         //Check if email already exist
         if (checkEmail(client.getEmail())) {
-            Client client1 = new Client();
-            return client1;
+            return Response.status(404).build();
         } else {
             Client clientCreated = dao.create(client);
-            return clientCreated;
+            return Response.ok("Client created.").type(MediaType.TEXT_HTML).build();
         }
     }
 
@@ -56,13 +55,7 @@ public class ClientResource {
     @UnitOfWork
     public Boolean checkEmail(@PathParam("email") String email) {
         Client client = dao.findByEmail(email);
-
-        if(client == null){
-            return false;
-        }
-        else {
-            return true;
-        }
+        return client != null;
     }
 
     // For test purpose

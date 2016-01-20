@@ -5,6 +5,7 @@ package core;
  */
 
 import javax.persistence.*;
+import java.security.Principal;
 import java.util.List;
 
 @Entity
@@ -19,7 +20,7 @@ import java.util.List;
         query = "SELECT c FROM Client c WHERE c.email = :email"
         )
 })
-public class Client {
+public class Client implements Principal{
 
     private long id;
     private String name;

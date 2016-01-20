@@ -1,6 +1,5 @@
 package resources;
 
-import api.Saying;
 import com.codahale.metrics.annotation.Timed;
 import com.google.common.base.Optional;
 
