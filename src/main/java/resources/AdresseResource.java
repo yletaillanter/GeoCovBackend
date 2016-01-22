@@ -26,7 +26,6 @@ public class AdresseResource {
     }
 
     @GET
-    @Path("/all")
     @Produces("application/json")
     public List<Adresse> getAll() {
         return dao.findAll();
@@ -41,7 +40,7 @@ public class AdresseResource {
     @POST
     @UnitOfWork
     public Adresse addAdresse(Adresse adresse) {
-        //TODO verify if adress already exist
+        //TODO verify if address already exist
        /* if (dao.isExist(adresse)) {
             return adresse;
         } else {*/

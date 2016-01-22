@@ -62,7 +62,6 @@ public class GeoCovApplication extends Application<GeoCovConfiguration> {
     public void initialize(Bootstrap<GeoCovConfiguration> bootstrap) {
         bootstrap.addBundle(hibernateBundle);
         bootstrap.addBundle(migrationsBundle);
-        //bootstrap.addBundle(new MultiPartBundle());
     }
 
     @Override
@@ -97,7 +96,6 @@ public class GeoCovApplication extends Application<GeoCovConfiguration> {
         cors.setInitParameter("allowedMethods", "OPTIONS,GET,PUT,POST,DELETE,HEAD");
 
         // Add URL mapping
-
         cors.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
     }
 }

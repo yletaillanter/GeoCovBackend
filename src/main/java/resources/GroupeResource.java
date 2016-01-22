@@ -25,7 +25,6 @@ public class GroupeResource {
     }
 
     @GET
-    @Path("/all")
     @Produces("application/json")
     @UnitOfWork
     public List<Groupe> getAll() {
