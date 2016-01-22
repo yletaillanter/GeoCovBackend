@@ -64,20 +64,12 @@ public class ClientResource {
     @UnitOfWork
     public void addDummyClients() {
         // Adresse 1
-        Adresse adresse1 = new Adresse();
-        adresse1.setNumero("263");
-        adresse1.setRue("Avenue du Général Leclerc");
-        adresse1.setCp("35000");
-        adresse1.setVille("Rennes");
+        Adresse adresse1 = new Adresse("263", "Avenue du Général Leclerc", "35000", "Rennes");
         adresse1.setLatitude("48.116408");
         adresse1.setLongitude("-1.638647");
 
         // Adresse 2
-        Adresse adresse2 = new Adresse();
-        adresse2.setNumero("1");
-        adresse2.setRue("rue du père Grignon");
-        adresse2.setCp("35000");
-        adresse2.setVille("Rennes");
+        Adresse adresse2 = new Adresse("1", "rue du père Grignon", "35000", "Rennes");
         adresse2.setLatitude("48.111807");
         adresse2.setLongitude("-1.687499");
 

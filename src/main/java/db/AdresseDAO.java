@@ -2,7 +2,9 @@ package db;
 
 import com.google.common.base.Optional;
 import core.Adresse;
+import core.Client;
 import io.dropwizard.hibernate.AbstractDAO;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 
 import java.util.List;
@@ -29,5 +31,12 @@ public class AdresseDAO extends AbstractDAO<Adresse> {
 
     public Boolean isExist(Adresse adresse) {
         return null;
+       /* Query q = namedQuery("Adresse.isExist");
+        q.setString("email", email);
+        if (q.) {
+            return true;
+        } else {
+            return false;
+        }*/
     }
 }
