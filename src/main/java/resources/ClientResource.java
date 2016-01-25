@@ -50,6 +50,19 @@ public class ClientResource {
         }
     }
 
+    @POST
+    @Path("/auth")
+    @UnitOfWork
+    public Response authClient(Client client) {
+        if (!dao.auth(client)) {
+            return Response.status(403).build();
+        } else {
+            Client c = dao.findByEmail(client.getEmail());
+            return Response.ok(c).type(MediaType.APPLICATION_JSON).build();
+        }
+
+    }
+
     @GET
     @Path("/checkEmail/{email}")
     @UnitOfWork

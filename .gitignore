@@ -4,8 +4,6 @@
 ### Java ###
 *.class
 
-geo-cov.local.yml
-
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
@@ -57,3 +55,4 @@ fabric.properties
 
 #Personnal conf file
 geo-cov-yo.yml
+geo-cov.local.yml

@@ -1,6 +1,7 @@
 package db;
 
 import com.google.common.base.Optional;
+import com.google.common.primitives.Booleans;
 import core.Client;
 import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.Query;
@@ -36,5 +37,14 @@ public class ClientDAO extends AbstractDAO<Client> {
         } else {
             return null;
         }
+    }
+
+    public Boolean auth(Client client) {
+        Client c = findByEmail(client.getEmail());
+        if (c != null) {
+            if (c.getPassword().equals(client.getPassword()))
+                return true;
+            else return false;
+        } else return false;
     }
 }
