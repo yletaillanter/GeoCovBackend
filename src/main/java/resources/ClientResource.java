@@ -46,7 +46,8 @@ public class ClientResource {
             return Response.status(404).build();
         } else {
             Client clientCreated = dao.create(client);
-            return Response.ok("Client created.").type(MediaType.TEXT_HTML).build();
+            return Response.ok(clientCreated).type(MediaType.APPLICATION_JSON).build();
+
         }
     }
 
