@@ -28,14 +28,16 @@ public class Adresse {
     private String latitude;
     private String longitude;
     private List<Client> clients;
+    private Boolean isEnd;
 
     public Adresse() {}
 
-    public Adresse(String numero, String rue, String cp, String ville) {
+    public Adresse(String numero, String rue, String cp, String ville, Boolean isEnd) {
         this.numero = numero;
         this.rue = rue;
         this.cp = cp;
         this.ville = ville;
+        this.isEnd = isEnd;
     }
 
     @Id
@@ -107,6 +109,14 @@ public class Adresse {
 
     public void setClients(List<Client> clients) {
         this.clients = clients;
+    }
+
+    public Boolean getEnd() {
+        return isEnd;
+    }
+
+    public void setEnd(Boolean end) {
+        isEnd = end;
     }
 
 }
