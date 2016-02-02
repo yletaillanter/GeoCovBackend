@@ -97,7 +97,7 @@ public class Client implements Principal{
         this.phone = phone;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch =  FetchType.EAGER)
     @JoinTable(name="client_adresse")
     public List<Adresse> getAdresses() {
         return adresses;
@@ -115,7 +115,7 @@ public class Client implements Principal{
         this.distanceMax = distanceMax;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "groupe_id")
     public Groupe getGroupe() {
         return groupe;
