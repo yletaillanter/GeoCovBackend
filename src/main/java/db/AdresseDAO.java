@@ -30,13 +30,15 @@ public class AdresseDAO extends AbstractDAO<Adresse> {
     }
 
     public Boolean isExist(Adresse adresse) {
-        return null;
-       /* Query q = namedQuery("Adresse.isExist");
-        q.setString("email", email);
-        if (q.) {
-            return true;
-        } else {
-            return false;
-        }*/
+        Query q = namedQuery("Adresse.isExist");
+        q.setString("rue", adresse.getRue());
+        q.setString("numero", adresse.getNumero());
+        return q.uniqueResult() != null;
+    }
+
+    public List<Adresse> getAllByRue(String nom) {
+        Query q = namedQuery("Adresse.findByRue");
+        q.setString("rue", nom);
+        return list(q);
     }
 }

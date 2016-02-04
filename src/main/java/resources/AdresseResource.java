@@ -27,12 +27,14 @@ public class AdresseResource {
 
     @GET
     @Produces("application/json")
+    @UnitOfWork
     public List<Adresse> getAll() {
         return dao.findAll();
     }
 
     @GET
     @Path("/{id}")
+    @UnitOfWork
     public Optional<Adresse> getAdresse(@PathParam("id") long id) {
         return dao.findById(id);
     }
@@ -40,12 +42,28 @@ public class AdresseResource {
     @POST
     @UnitOfWork
     public Adresse addAdresse(Adresse adresse) {
-        //TODO verify if address already exist
-       /* if (dao.isExist(adresse)) {
+        if (dao.isExist(adresse)) {
             return adresse;
-        } else {*/
+        } else {
             Adresse newAdresse = dao.create(adresse);
             return newAdresse;
-        //}
+        }
+    }
+
+    @GET
+    @Path("/rue/{nom}")
+    @UnitOfWork
+    public List<Adresse> getAllByRue(@PathParam("nom") String nom) {
+        return dao.getAllByRue(nom);
+    }
+
+    @GET
+    @Path("/test/{numero}/{rue}")
+    @UnitOfWork
+    public boolean isExist(@PathParam("numero") String numero, @PathParam("rue") String rue) {
+        Adresse a = new Adresse();
+        a.setNumero(numero);
+        a.setRue(rue);
+        return dao.isExist(a);
     }
 }

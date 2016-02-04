@@ -10,12 +10,15 @@ import java.util.List;
 @Table(name = "adresse")
 @NamedQueries({
         @NamedQuery(
-                name = "Adresse.findAll",
-                query = "SELECT a FROM Adresse a"
+            name = "Adresse.findAll",
+            query = "SELECT a FROM Adresse a"
         ),
         @NamedQuery(
-        name = "Adresse.isExist",
-        query = "SELECT a FROM Adresse a"
+            name = "Adresse.isExist",
+            query = "SELECT a FROM Adresse a WHERE a.rue= :rue AND a.numero= :numero"),
+        @NamedQuery(
+            name = "Adresse.findByRue",
+            query = "SELECT a FROM Adresse a WHERE a.rue= :rue"
         )
 })
 public class Adresse {
