@@ -31,12 +31,15 @@ public class ClientResource {
 
     @GET
     @Produces("application/json")
+    @UnitOfWork
     public List<Client> getAll() {
-        return dao.findAll();
+        List<Client> cs = dao.findAll();
+        return cs;
     }
 
     @GET
     @Path("/{id}")
+    @UnitOfWork
     public Optional<Client> getUserById(@PathParam("id") long id) {
         return dao.findById(id);
     }
