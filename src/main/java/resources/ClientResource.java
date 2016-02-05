@@ -78,6 +78,14 @@ public class ClientResource {
         return client != null;
     }
 
+    @PUT
+    @Path("/{id}")
+    @UnitOfWork
+    public Response updateClient(@PathParam("id") long id, Client client) {
+        return Response.ok(dao.update(id, client)).type(MediaType.APPLICATION_JSON).build();
+    }
+
+
     // For test purpose
     @GET
     @Path("/addDummyclient")

@@ -47,4 +47,27 @@ public class ClientDAO extends AbstractDAO<Client> {
             else return false;
         } else return false;
     }
+
+    public Client update(Long id, Client client) {
+        Optional<Client> oldClient = findById(id);
+        if (oldClient.isPresent()) {
+            if (client.getName() != null && oldClient.get().getName() != client.getName()) {
+                oldClient.get().setName(client.getName());
+            }
+            if (client.getLastname() != null && oldClient.get().getLastname() != client.getLastname()) {
+                oldClient.get().setLastname(client.getLastname());
+            }
+            if (client.getEmail() != null && oldClient.get().getEmail() != client.getEmail()) {
+                oldClient.get().setEmail(client.getEmail());
+            }
+            if (client.getPhone() != null && oldClient.get().getPhone() != client.getPhone()) {
+                oldClient.get().setPhone(client.getPhone());
+            }
+            if (client.getPassword() != null && oldClient.get().getPassword() != client.getPassword()) {
+                oldClient.get().setPassword(client.getPassword());
+            }
+            persist(oldClient.get());
+        }
+        return oldClient.get();
+    }
 }
