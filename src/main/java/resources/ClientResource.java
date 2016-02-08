@@ -82,7 +82,11 @@ public class ClientResource {
     @Path("/{id}")
     @UnitOfWork
     public Response updateClient(@PathParam("id") long id, Client client) {
-        return Response.ok(dao.update(id, client)).type(MediaType.APPLICATION_JSON).build();
+        if(client.getAdresses() != null) {
+            return Response.ok(dao.updateAdresse(id, client)).type(MediaType.APPLICATION_JSON).build();
+        } else {
+            return Response.ok(dao.update(id, client)).type(MediaType.APPLICATION_JSON).build();
+        }
     }
 
 
