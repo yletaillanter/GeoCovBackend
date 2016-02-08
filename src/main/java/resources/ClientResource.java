@@ -10,10 +10,7 @@ import io.dropwizard.hibernate.UnitOfWork;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by yoannlt on 07/01/2016.
@@ -201,33 +198,53 @@ public class ClientResource {
             matrice.put(itClient.getId(), distance);
         }
 
-        List cluster = new ArrayList();
-        for (HashMap.Entry<Long, HashMap> mParent : matrice.entrySet())
-        {
-            HashMap<Long, Double> mChildrens = mParent.getValue();
-            List<Long> children = new ArrayList<Long>();
-            for (HashMap.Entry<Long, Double> mChild : mChildrens.entrySet()) {
-                Long max = null;
-                //TODO le code
-                if (children.isEmpty() || children.size() == 2) {
-                    children.add(mChild.getKey());
-                } else {
-                    Iterator itCh = children.iterator();
-                    while(itCh.hasNext()) {
-                        System.out.println(itCh.next());
-                    }
+        //List qui contiendra les clusters
+        List<ArrayList> cluster = new ArrayList<ArrayList>();
 
+        for (HashMap.Entry<Long, HashMap> hash1 : matrice.entrySet())
+        {
+            HashMap<Long, Double> mChildrens = hash1.getValue();
+            ArrayList children = new ArrayList();
+
+            for (HashMap.Entry<Long, Double> hash2 : mChildrens.entrySet()) {
+                Long max;
+                if (children.size() < 2) {
+                    children.add(hash2.getKey());
+                } else {
+                    max = null;
+                    // On iterate sur la liste, voir si on est pas plus prés qu'une des valeurs présente
+                    ListIterator<Long> itCh = children.listIterator();
+                    int index = 0;
+                    boolean modified = false;
+                    while(itCh.hasNext()) {
+                        index = 0;
+                        Long currentChild = itCh.next();
+                        if(hash2.getValue()< mChildrens.get(currentChild)){
+                            if(max == null){
+                                max = hash2.getKey();
+                                modified = true;
+                            } else {
+                                if (mChildrens.get(currentChild) > mChildrens.get(max)){
+                                    max = hash2.getKey();
+                                    modified = true;
+                                }
+                            }
+                        }
+                        index++;
+                    }
+                    if(modified) {
+                        children.remove(index);
+                        children.add(hash2.getKey());
+                    }
                 }
             }
-
             cluster.add(children);
         }
 
-        System.out.println(cluster.toString());
+        return cluster.toString();
 
-        return matrice.toString();
+        //return matrice.toString();
     }
-
 
     private double distFrom(double lat1, double lng1, double lat2, double lng2) {
         double earthRadius = 6371000; //meters
