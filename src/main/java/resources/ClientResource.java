@@ -1,10 +1,10 @@
 package resources;
 
+import com.google.common.base.Objects;
 import com.google.common.base.Optional;
 import core.Adresse;
 import core.Client;
 import db.ClientDAO;
-import io.dropwizard.cli.Cli;
 import io.dropwizard.hibernate.UnitOfWork;
 
 import javax.ws.rs.*;
@@ -201,6 +201,30 @@ public class ClientResource {
             matrice.put(itClient.getId(), distance);
         }
 
+        List cluster = new ArrayList();
+        for (HashMap.Entry<Long, HashMap> mParent : matrice.entrySet())
+        {
+            HashMap<Long, Double> mChildrens = mParent.getValue();
+            List<Long> children = new ArrayList<Long>();
+            for (HashMap.Entry<Long, Double> mChild : mChildrens.entrySet()) {
+                Long max = null;
+                //TODO le code
+                if (children.isEmpty() || children.size() == 2) {
+                    children.add(mChild.getKey());
+                } else {
+                    Iterator itCh = children.iterator();
+                    while(itCh.hasNext()) {
+                        System.out.println(itCh.next());
+                    }
+
+                }
+            }
+
+            cluster.add(children);
+        }
+
+        System.out.println(cluster.toString());
+
         return matrice.toString();
     }
 
@@ -213,8 +237,10 @@ public class ClientResource {
                 Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
                         Math.sin(dLng/2) * Math.sin(dLng/2);
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-        double dist = (earthRadius * c);
+        double dist = Math.floor(earthRadius * c);
 
         return dist;
     }
+
+
 }
