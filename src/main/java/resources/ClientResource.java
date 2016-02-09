@@ -200,33 +200,57 @@ public class ClientResource {
         }
 
         //List qui contiendra les clusters
-        ArrayList<ArrayList> cluster = new ArrayList<ArrayList>();
+        ArrayList<ArrayList> clusters = new ArrayList<ArrayList>();
 
-        for (HashMap.Entry<Long, HashMap> hash1 : matrice.entrySet())
-        {
+        int counter = 1;
+        // ON parcours la hashmap principale
+        for (HashMap.Entry<Long, HashMap> hash1 : matrice.entrySet()) {
+
+            System.out.println("parcours de la map : " + hash1.toString());
+
             HashMap<Long, Double> mChildrens = hash1.getValue();
-            ArrayList children = new ArrayList();
 
+            // liste servant à stocker le cluster
+            ArrayList cluster = new ArrayList();
+
+            // on parcours la hashmap des distances
             for (HashMap.Entry<Long, Double> hash2 : mChildrens.entrySet()) {
+                System.out.println("parcours de la map distances : " + hash2.toString());
                 Long max;
-                if (children.size() < 2) {
-                    children.add(hash2.getKey());
-                } else {
+                //  si vide on ajoute de suite
+                if (cluster.size() < 2) {
+                    if(clusters.isEmpty()) {
+                        cluster.add(hash2.getKey());
+
+                    } else {
+                        if (checkIfNotInOtherClusterFirst(hash2.getKey(), clusters, matrice)) {
+                            cluster.add(hash2.getKey());
+                            System.out.println("add : " + hash2.getKey() + " to cluster : " + cluster);
+                        }
+                    }
+                } else { // La liste n'est pas vide
+                    // init de max
                     max = null;
+
                     // On iterate sur la liste, voir si on est pas plus prés qu'une des valeurs présente
-                    ListIterator<Long> itCh = children.listIterator();
+                    ListIterator<Long> itCh = cluster.listIterator();
+
                     int index = 0;
                     boolean modified = false;
+
+                    // On parcours la liste voir si la distance actuelle est plus proche
                     while(itCh.hasNext()) {
                         index = 0;
                         Long currentChild = itCh.next();
                         if(hash2.getValue()< mChildrens.get(currentChild)){
                             if(max == null){
-                                max = hash2.getKey();
+                                max = currentChild;
                                 modified = true;
+                                System.out.println("max devient : " + max);
                             } else {
                                 if (mChildrens.get(currentChild) > mChildrens.get(max)){
-                                    max = hash2.getKey();
+                                    max = currentChild;
+                                    System.out.println("(in) max devient : " + max);
                                     modified = true;
                                 }
                             }
@@ -234,18 +258,31 @@ public class ClientResource {
                         index++;
                     }
                     if(modified) {
-                        if (checkIfNotInOtherClusterFirst((long) index, hash2.getKey(), cluster, matrice)) {
-                            children.remove(index);
-                            children.add(hash2.getKey());
+
+                        System.out.println("Je veux ajouter la valeur : "+hash2.getKey());
+                        boolean notInCluster = checkIfNotInOtherClusterFirst(hash2.getKey(), /*(long) max,*/  clusters, matrice);
+
+
+                        if (notInCluster) {
+                            System.out.println("Modified " + max);
+                            cluster.remove(max);
+                            cluster.add(hash2.getKey());
                         }
                     }
                 }
             }
-            cluster.add(children);
+            cluster.add(hash1.getKey());
+            System.out.println("cluster final : " + cluster);
+            clusters.add(cluster);
+
+
+            if (counter == Math.floor(matrice.size()/2)){
+                return clusters.toString();
+            }
+            counter++;
         }
 
-        return cluster.toString();
-
+        return clusters.toString();
         //return matrice.toString();
     }
 
@@ -262,14 +299,22 @@ public class ClientResource {
         return dist;
     }
 
-    private boolean checkIfNotInOtherClusterFirst(Long valueToCheck, Long myValue, ArrayList<ArrayList> cluster, HashMap<Long, HashMap> matrice) {
-        ListIterator<ArrayList> itClu = cluster.listIterator();
+    private boolean checkIfNotInOtherClusterFirst(Long valueToCheck, /*Long myValue,*/ ArrayList<ArrayList> clusters, HashMap<Long, HashMap> matrice) {
+        //return true;
+        ListIterator<ArrayList> itClu = clusters.listIterator();
 
         HashMap<Long, Double> distance = null;
 
+        System.out.println("DANS LE CHECK");
+
+        // Bug pour la première boucle, il n'y a pas encore de cluster dans la boucle
         while (itClu.hasNext()) {
+
             ArrayList children = itClu.next();
             if (children.contains(valueToCheck)) {
+                System.out.println("return false : contain");
+                return false;
+                /*
                 double total = 0;
                 ListIterator<Long> itCh = children.listIterator();
                 while (itCh.hasNext()) {
@@ -281,13 +326,21 @@ public class ClientResource {
                 }
                 distance = matrice.get(valueToCheck);
                 Double test = distance.get(myValue);
-                if (total/children.size() < test)
+                if (total/children.size() < test) {
+                    System.out.println("return false ");
                     return false;
+                }
                 else
                     return true;
+                */
+
+            } else {
+                System.out.println("return TRUE : NOT contain");
+                return true;
             }
         }
-
-        return false;
+        System.out.println("return TRUE : PAS ENCORE DE CLUSTERS");
+        return true;
     }
+
 }
