@@ -234,7 +234,7 @@ public class ClientResource {
                         index++;
                     }
                     if(modified) {
-                        checkIfNotInOtherClusterFirst(index, hash2.getKey(), cluster, matrice);
+                        checkIfNotInOtherClusterFirst((long) index, hash2.getKey(), cluster, matrice);
                         children.remove(index);
                         children.add(hash2.getKey());
                     }
@@ -261,7 +261,7 @@ public class ClientResource {
         return dist;
     }
 
-    private boolean checkIfNotInOtherClusterFirst(int valueToCheck, Long myValue, ArrayList<ArrayList> cluster, HashMap<Long, HashMap> matrice) {
+    private boolean checkIfNotInOtherClusterFirst(Long valueToCheck, Long myValue, ArrayList<ArrayList> cluster, HashMap<Long, HashMap> matrice) {
         ListIterator<ArrayList> itClu = cluster.listIterator();
 
         HashMap<Long, Double> distance = null;
@@ -273,7 +273,7 @@ public class ClientResource {
                 ListIterator<Long> itCh = children.listIterator();
                 while (itCh.hasNext()) {
                     Long next = itCh.next();
-                    if(next != valueToCheck){
+                    if(!next.equals(valueToCheck)){
                         distance = matrice.get(next);
                         total += distance.get(valueToCheck);
                     }
