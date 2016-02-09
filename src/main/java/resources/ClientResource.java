@@ -234,9 +234,10 @@ public class ClientResource {
                         index++;
                     }
                     if(modified) {
-                        checkIfNotInOtherClusterFirst((long) index, hash2.getKey(), cluster, matrice);
-                        children.remove(index);
-                        children.add(hash2.getKey());
+                        if (checkIfNotInOtherClusterFirst((long) index, hash2.getKey(), cluster, matrice)) {
+                            children.remove(index);
+                            children.add(hash2.getKey());
+                        }
                     }
                 }
             }
