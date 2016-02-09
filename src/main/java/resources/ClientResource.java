@@ -10,6 +10,7 @@ import io.dropwizard.hibernate.UnitOfWork;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -199,7 +200,7 @@ public class ClientResource {
         }
 
         //List qui contiendra les clusters
-        List<ArrayList> cluster = new ArrayList<ArrayList>();
+        ArrayList<ArrayList> cluster = new ArrayList<ArrayList>();
 
         for (HashMap.Entry<Long, HashMap> hash1 : matrice.entrySet())
         {
@@ -233,6 +234,7 @@ public class ClientResource {
                         index++;
                     }
                     if(modified) {
+                        checkIfNotInOtherClusterFirst(index, hash2.getKey(), cluster, matrice);
                         children.remove(index);
                         children.add(hash2.getKey());
                     }
@@ -259,5 +261,32 @@ public class ClientResource {
         return dist;
     }
 
+    private boolean checkIfNotInOtherClusterFirst(int valueToCheck, Long myValue, ArrayList<ArrayList> cluster, HashMap<Long, HashMap> matrice) {
+        ListIterator<ArrayList> itClu = cluster.listIterator();
 
+        HashMap<Long, Double> distance = null;
+
+        while (itClu.hasNext()) {
+            ArrayList children = itClu.next();
+            if (children.contains(valueToCheck)) {
+                double total = 0;
+                ListIterator<Long> itCh = children.listIterator();
+                while (itCh.hasNext()) {
+                    Long next = itCh.next();
+                    if(next != valueToCheck){
+                        distance = matrice.get(next);
+                        total += distance.get(valueToCheck);
+                    }
+                }
+                distance = matrice.get(valueToCheck);
+                Double test = distance.get(myValue);
+                if (total/children.size() < test)
+                    return false;
+                else
+                    return true;
+            }
+        }
+
+        return false;
+    }
 }
