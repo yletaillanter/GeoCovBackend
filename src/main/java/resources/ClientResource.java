@@ -271,9 +271,11 @@ public class ClientResource {
                     }
                 }
             }
-            cluster.add(hash1.getKey());
-            System.out.println("cluster final : " + cluster);
+            if (checkIfNotInOtherClusterFirst(hash1.getKey(), clusters, matrice)) {
+                cluster.add(hash1.getKey());
+            }
             clusters.add(cluster);
+            System.out.println("cluster final : " + cluster);
 
 
             if (counter == Math.floor(matrice.size()/2)){
