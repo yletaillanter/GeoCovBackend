@@ -118,6 +118,27 @@ public class ClientResource {
         adresse5.setLatitude("48.120825");
         adresse5.setLongitude("-1.635739");
 
+        // Adresse 6
+        Adresse adresse6 = new Adresse("20", "Avenue des Buttes de Coesmes", "35708", "Rennes", false);
+        adresse6.setLatitude("48.130825");
+        adresse6.setLongitude("-1.645739");
+
+        // Adresse 7
+        Adresse adresse7 = new Adresse("20", "Avenue des Buttes de Coesmes", "35708", "Rennes", false);
+        adresse7.setLatitude("48.110825");
+        adresse7.setLongitude("-1.635739");
+
+        // Adresse 8
+        Adresse adresse8 = new Adresse("20", "Avenue des Buttes de Coesmes", "35708", "Rennes", false);
+        adresse8.setLatitude("48.170825");
+        adresse8.setLongitude("-1.605739");
+
+        // Adresse 9
+        Adresse adresse9 = new Adresse("20", "Avenue des Buttes de Coesmes", "35708", "Rennes", false);
+        adresse9.setLatitude("48.100825");
+        adresse9.setLongitude("-1.675739");
+
+
         // Adresse Arrivé
         Adresse adresseArrive = new Adresse("1", "rue du père Grignon", "35000", "Rennes", true);
         adresseArrive.setLatitude("48.111807");
@@ -148,6 +169,26 @@ public class ClientResource {
         adresses5.add(adresse5);
         adresses5.add(adresseArrive);
 
+        //List d'adresse
+        List<Adresse> adresses6 = new ArrayList<Adresse>();
+        adresses6.add(adresse6);
+        adresses6.add(adresseArrive);
+
+        //List d'adresse
+        List<Adresse> adresses7 = new ArrayList<Adresse>();
+        adresses7.add(adresse7);
+        adresses7.add(adresseArrive);
+
+        //List d'adresse
+        List<Adresse> adresses8 = new ArrayList<Adresse>();
+        adresses8.add(adresse8);
+        adresses8.add(adresseArrive);
+
+        //List d'adresse
+        List<Adresse> adresses9 = new ArrayList<Adresse>();
+        adresses9.add(adresse9);
+        adresses9.add(adresseArrive);
+
         // Client
         Client client1 = new Client("Julie", "Guégnaud", "julie.guegnaud@etudiant.univ-rennes1.fr", "gateau", "0675456342");
         client1.setAdresses(adresses1);
@@ -164,11 +205,27 @@ public class ClientResource {
         Client client5 = new Client("Julie", "b", "julie.b@etudiant.univ-rennes1.fr", "gateau", "0675456342");
         client5.setAdresses(adresses5);
 
+        Client client6 = new Client("Julie", "w", "julie.w@etudiant.univ-rennes1.fr", "gateau", "0675456342");
+        client6.setAdresses(adresses6);
+
+        Client client7 = new Client("Julie", "d", "julie.d@etudiant.univ-rennes1.fr", "gateau", "0675456342");
+        client7.setAdresses(adresses7);
+
+        Client client8 = new Client("Julie", "e", "julie.e@etudiant.univ-rennes1.fr", "gateau", "0675456342");
+        client8.setAdresses(adresses8);
+
+        Client client9 = new Client("Julie", "f", "julie.f@etudiant.univ-rennes1.fr", "gateau", "0675456342");
+        client9.setAdresses(adresses9);
+
         addClient(client1);
         addClient(client2);
         addClient(client3);
         addClient(client4);
         addClient(client5);
+        addClient(client6);
+        addClient(client7);
+        addClient(client8);
+        addClient(client9);
     }
 
     // TEST
