@@ -407,7 +407,7 @@ public class ClientResource {
                 System.out.println("parcours de la map distances : " + hash2.toString());
                 Long max;
                 //  si vide on ajoute de suite
-                if (cluster.size() < 2) {
+                if (cluster.size() < 3) {
                     if(clusters.isEmpty()) {
                         cluster.add(hash2.getKey());
 
@@ -468,7 +468,7 @@ public class ClientResource {
 
 
             if (counter == Math.floor(matrice.size()/2)){
-                return clusters.toString() + "  " + matrice.toString();
+                return clusters.toString();
             }
             counter++;
         }
