@@ -496,7 +496,7 @@ public class ClientResource {
         HashMap<Long, Double> distance = null;
 
         System.out.println("DANS LE CHECK");
-        boolean result = false;
+        boolean result = true;
 
         // Bug pour la première boucle, il n'y a pas encore de cluster dans la boucle
         while (itClu.hasNext()) {
