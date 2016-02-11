@@ -226,6 +226,135 @@ public class ClientResource {
         addClient(client7);
         addClient(client8);
         addClient(client9);
+
+        // AJOUT DE CLIENT
+        Adresse adresse10 = new Adresse("9", "Rue du Gast", "35700", "Rennes", false);
+        adresse10.setLatitude("48.132065");
+        adresse10.setLongitude("-1.660300");
+
+        // adresse11
+        Adresse adresse11 = new Adresse("12", "Rue du Houx", "35700", "Rennes", false);
+        adresse11.setLatitude("48.131177");
+        adresse11.setLongitude("-1.664828");
+
+        // adresse12
+        Adresse adresse12 = new Adresse("23", "Rue de Locmariaquer", "35700", "Rennes", false);
+        adresse12.setLatitude("48.134160");
+        adresse12.setLongitude("-1.670150");
+
+        // adresse13
+        Adresse adresse13 = new Adresse("6", "Rue Raoul Anthony", "35700", "Rennes", false);
+        adresse13.setLatitude("48.124782");
+        adresse13.setLongitude("-1.673828");
+
+        // adresse14
+        Adresse adresse14 = new Adresse("20", "Avenue des Buttes de Coesmes", "35700", "Rennes", false);
+        adresse14.setLatitude("48.120825");
+        adresse14.setLongitude("-1.635739");
+
+        // Adresse 6
+        Adresse adresse15 = new Adresse("5", "Rue de Vincennes", "35700", "Rennes", false);
+        adresse15.setLatitude("48.117994");
+        adresse15.setLongitude("-1.675127");
+
+        // Adresse 7
+        Adresse adresse16 = new Adresse("1", "Rue Jean Macé", "35700", "Rennes", false);
+        adresse16.setLatitude("48.117218");
+        adresse16.setLongitude("-1.673284");
+
+        // Adresse 8
+        Adresse adresse17 = new Adresse("15", "Boulevard de Sévigné", "35700", "Rennes", false);
+        adresse17.setLatitude("48.116380");
+        adresse17.setLongitude("-1.672404");
+
+        // Adresse 9
+        Adresse adresse18 = new Adresse("23", "Rue de la Palestine", "35700", "Rennes", false);
+        adresse18.setLatitude("48.115255");
+        adresse18.setLongitude("-1.667759");
+
+
+        //List d'adresse
+        List<Adresse> adresses10 = new ArrayList<Adresse>();
+        adresses10.add(adresse10);
+        adresses10.add(adresseArrive);
+
+        //List d'adresse
+        List<Adresse> adresses11 = new ArrayList<Adresse>();
+        adresses11.add(adresse11);
+        adresses11.add(adresseArrive);
+
+        //List d'adresse
+        List<Adresse> adresses12 = new ArrayList<Adresse>();
+        adresses12.add(adresse12);
+        adresses12.add(adresseArrive);
+
+        //List d'adresse
+        List<Adresse> adresses13 = new ArrayList<Adresse>();
+        adresses13.add(adresse13);
+        adresses13.add(adresseArrive);
+
+        //List d'adresse
+        List<Adresse> adresses14 = new ArrayList<Adresse>();
+        adresses14.add(adresse14);
+        adresses14.add(adresseArrive);
+
+        //List d'adresse
+        List<Adresse> adresses15 = new ArrayList<Adresse>();
+        adresses15.add(adresse15);
+        adresses15.add(adresseArrive);
+
+        //List d'adresse
+        List<Adresse> adresses16 = new ArrayList<Adresse>();
+        adresses16.add(adresse16);
+        adresses16.add(adresseArrive);
+
+        //List d'adresse
+        List<Adresse> adresses17 = new ArrayList<Adresse>();
+        adresses17.add(adresse17);
+        adresses17.add(adresseArrive);
+
+        //List d'adresse
+        List<Adresse> adresses18 = new ArrayList<Adresse>();
+        adresses18.add(adresse18);
+        adresses18.add(adresseArrive);
+
+        // Client
+        Client client10 = new Client("Julie", "Guégnaud", "julie.guegnaud@etudiant.univ-rennes1.fr", "gateau", "0675456342");
+        client10.setAdresses(adresses10);
+
+        Client client11 = new Client("Julie", "aa", "julie.guegnaudaa@univ-rennes1.fr", "gateau", "0675456342");
+        client11.setAdresses(adresses11);
+
+        Client client12 = new Client("Julie", "zz", "juliezz@etudiant.univ-rennes1.fr", "gateau", "0675456342");
+        client12.setAdresses(adresses12);
+
+        Client client13 = new Client("Julie", "ee", "julie.cee@etudiant.univ-rennes1.fr", "gateau", "0675456342");
+        client13.setAdresses(adresses13);
+
+        Client client14 = new Client("Julie", "rr", "julie.brr@etudiant.univ-rennes1.fr", "gateau", "0675456342");
+        client14.setAdresses(adresses14);
+
+        Client client15 = new Client("Julie", "vv", "julie.vvw@etudiant.univ-rennes1.fr", "gateau", "0675456342");
+        client15.setAdresses(adresses15);
+
+        Client client16 = new Client("Julie", "gg", "julie.ggd@etudiant.univ-rennes1.fr", "gateau", "0675456342");
+        client16.setAdresses(adresses16);
+
+        Client client17 = new Client("Julie", "nn", "julie.enn@etudiant.univ-rennes1.fr", "gateau", "0675456342");
+        client17.setAdresses(adresses17);
+
+        Client client18 = new Client("Julie", "ssd", "julie.fssd@etudiant.univ-rennes1.fr", "gateau", "0675456342");
+        client18.setAdresses(adresses18);
+
+        addClient(client10);
+        addClient(client11);
+        addClient(client12);
+        addClient(client13);
+        addClient(client14);
+        addClient(client15);
+        addClient(client16);
+        addClient(client17);
+        addClient(client18);
     }
 
     // TEST
@@ -233,6 +362,7 @@ public class ClientResource {
     @Path("/testDistance")
     @UnitOfWork
     public String testDistance() {
+
         List<Client> clients = dao.findAll();
         HashMap<Long, HashMap> matrice = new HashMap<Long, HashMap>();
         Iterator<Client> itC = clients.iterator();
@@ -255,6 +385,8 @@ public class ClientResource {
             }
             matrice.put(itClient.getId(), distance);
         }
+
+        System.out.println(matrice.toString());
 
         //List qui contiendra les clusters
         ArrayList<ArrayList> clusters = new ArrayList<ArrayList>();
@@ -336,13 +468,12 @@ public class ClientResource {
 
 
             if (counter == Math.floor(matrice.size()/2)){
-                return clusters.toString();
+                return clusters.toString() + "  " + matrice.toString();
             }
             counter++;
         }
 
-        return clusters.toString();
-        //return matrice.toString();
+        return clusters.toString(); // + " Le cluster : " + clusters.toString()
     }
 
     private double distFrom(double lat1, double lng1, double lat2, double lng2) {
@@ -365,14 +496,19 @@ public class ClientResource {
         HashMap<Long, Double> distance = null;
 
         System.out.println("DANS LE CHECK");
+        boolean result = false;
 
         // Bug pour la première boucle, il n'y a pas encore de cluster dans la boucle
         while (itClu.hasNext()) {
+            result = false;
 
             ArrayList children = itClu.next();
+            System.out.println("JE CHECK DANS : " + children.toString());
+
             if (children.contains(valueToCheck)) {
                 System.out.println("return false : contain");
                 return false;
+
                 /*
                 double total = 0;
                 ListIterator<Long> itCh = children.listIterator();
@@ -395,11 +531,11 @@ public class ClientResource {
 
             } else {
                 System.out.println("return TRUE : NOT contain");
-                return true;
+                result = true;
             }
         }
         System.out.println("return TRUE : PAS ENCORE DE CLUSTERS");
-        return true;
+        return result;
     }
 
 }
