@@ -36,7 +36,7 @@ public class Groupe {
         this.id = id;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "groupe")
+    @OneToMany(mappedBy = "groupe", fetch = FetchType.EAGER)
     public List<Client> getClients() {
         return clients;
     }

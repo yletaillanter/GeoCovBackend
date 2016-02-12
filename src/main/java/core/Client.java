@@ -115,7 +115,7 @@ public class Client implements Principal{
         this.distanceMax = distanceMax;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "groupe_id")
     public Groupe getGroupe() {
         return groupe;

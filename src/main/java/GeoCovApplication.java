@@ -79,7 +79,7 @@ public class GeoCovApplication extends Application<GeoCovConfiguration> {
         environment.jersey().register(new AdresseResource(adao));
 
         // Add groupe Ressources
-        final GroupeDAO gdao = new GroupeDAO(hibernateBundle.getSessionFactory());
+        final GroupeDAO gdao = new GroupeDAO(hibernateBundle.getSessionFactory(), cdao);
         environment.jersey().register(new GroupeResource(gdao));
 
         final TemplateHealthCheck healthCheck =

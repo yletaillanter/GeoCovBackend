@@ -4,6 +4,7 @@ import com.google.common.base.Optional;
 import core.Adresse;
 import core.Groupe;
 import db.AdresseDAO;
+import db.ClientDAO;
 import db.GroupeDAO;
 import io.dropwizard.hibernate.UnitOfWork;
 
@@ -51,5 +52,12 @@ public class GroupeResource {
     public Groupe createTestGroupe() {
         Groupe newGroupe = dao.create(new Groupe());
         return newGroupe;
+    }
+
+    @GET
+    @Path("/getCluster")
+    @UnitOfWork
+    public List<Groupe> getClusters() {
+        return dao.insertCluster();
     }
 }
