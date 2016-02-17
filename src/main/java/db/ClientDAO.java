@@ -244,7 +244,7 @@ public class ClientDAO extends AbstractDAO<Client> {
         ListIterator<ArrayList> itClu = clusters.listIterator();
         HashMap<Long, Double> distance = null;
         boolean result = true;
-        // Bug pour la première boucle, il n'y a pas encore de cluster dans la boucle
+
         while (itClu.hasNext()) {
             result = false;
             ArrayList children = itClu.next();

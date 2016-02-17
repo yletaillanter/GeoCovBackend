@@ -18,7 +18,13 @@ import java.util.List;
             query = "SELECT a FROM Adresse a WHERE a.rue= :rue AND a.numero= :numero"),
         @NamedQuery(
             name = "Adresse.findByRue",
-            query = "SELECT a FROM Adresse a WHERE a.rue= :rue"
+            query = "SELECT a FROM Adresse a WHERE a.rue= :rue")
+})
+@NamedNativeQueries({
+        @NamedNativeQuery(
+            name = "Adresse.findByUser",
+            query = "SELECT * FROM adresse a, client_adresse ca WHERE a.id = ca.adresses_id AND ca.clients_id = :id_client",
+            resultClass = Adresse.class
         )
 })
 public class Adresse {
@@ -121,5 +127,4 @@ public class Adresse {
     public void setEnd(Boolean end) {
         isEnd = end;
     }
-
 }

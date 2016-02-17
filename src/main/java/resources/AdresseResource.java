@@ -66,4 +66,11 @@ public class AdresseResource {
         a.setRue(rue);
         return dao.isExist(a);
     }
+
+    @GET
+    @Path("/user/{id}")
+    @UnitOfWork
+    public List<Adresse> getAllAddressByUserId(@PathParam("id") long id) {
+        return dao.getAllAdresseByUser(id);
+    }
 }

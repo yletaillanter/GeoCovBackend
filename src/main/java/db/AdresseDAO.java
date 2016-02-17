@@ -41,4 +41,10 @@ public class AdresseDAO extends AbstractDAO<Adresse> {
         q.setString("rue", nom);
         return list(q);
     }
+
+    public List<Adresse> getAllAdresseByUser(Long id_client) {
+        Query q = namedQuery("Adresse.findByUser");
+        q.setLong("id_client", id_client);
+        return list(q);
+    }
 }

@@ -4,6 +4,8 @@ package core;
  * Created by jeremy on 08/01/2016.
  */
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.security.Principal;
 import java.util.List;
@@ -121,6 +123,7 @@ public class Client implements Principal{
         return groupe;
     }
 
+    @JsonIgnore
     public void setGroupe(Groupe groupe) {
         this.groupe = groupe;
     }
