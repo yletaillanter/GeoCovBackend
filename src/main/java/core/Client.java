@@ -4,7 +4,8 @@ package core;
  * Created by jeremy on 08/01/2016.
  */
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import java.security.Principal;
@@ -117,8 +118,9 @@ public class Client implements Principal{
         this.distanceMax = distanceMax;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "groupe_id")
+    @JsonIgnoreProperties
     public Groupe getGroupe() {
         return groupe;
     }

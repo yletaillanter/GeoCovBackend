@@ -42,6 +42,7 @@ public class GroupeDAO extends AbstractDAO<Groupe> {
     public List<Groupe> insertCluster() {
         // On récupère les clusters
         ArrayList clusters = cdao.getCluster();
+        System.out.println("cluster : " + clusters.toString());
         // On créer un itérator sur la liste de clusters pour pouvoir la parcourir
         Iterator<ArrayList> itC = clusters.iterator();
         // On créer une liste qui sera celle renvoyé à la fin
@@ -50,6 +51,7 @@ public class GroupeDAO extends AbstractDAO<Groupe> {
         while (itC.hasNext()) {
             // On récupère notre groupe
             ArrayList itcNext = itC.next();
+            System.out.println(itcNext);
             // On créer un itérator sur notre groupe pour récupérer les id des clients
             Iterator<Long> itlistId = itcNext.iterator();
             // On créer une liste de clients correspondant à notre groupe
@@ -72,9 +74,7 @@ public class GroupeDAO extends AbstractDAO<Groupe> {
                     listCli.add(cli.get());
                     // On set le groupe à notre client
                     cdao.updateGroupe(c, gAdd);
-//                    c.setGroupe(gAdd);
                     // On met à jour (persist) notre client
-//                    cdao.create(c);
                 }
             }
             // On set la liste de client à notre groupe
@@ -86,5 +86,21 @@ public class GroupeDAO extends AbstractDAO<Groupe> {
         }
         // On renvoie la liste des groupes
         return lGroupe;
+    }
+
+    public Groupe getByClient(long id) {
+        Optional<Client> cli = cdao.findById(id);
+        if (cli.isPresent()) {
+            Client realCli = cli.get();
+            List<Groupe> lGroupe = findAll();
+            Iterator itGroupe = lGroupe.iterator();
+            while (itGroupe.hasNext()) {
+                Groupe g = (Groupe) itGroupe.next();
+                if (g.getClients().contains(realCli)) {
+                    return g;
+                }
+            }
+        }
+        return null;
     }
 }

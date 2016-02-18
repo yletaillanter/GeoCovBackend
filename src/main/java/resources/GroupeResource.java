@@ -60,4 +60,11 @@ public class GroupeResource {
     public List<Groupe> getClusters() {
         return dao.insertCluster();
     }
+
+    @GET
+    @Path("getByClient/{id}")
+    @UnitOfWork
+    public Groupe getByClient(@PathParam("id") long idClient) {
+        return dao.getByClient(idClient);
+    }
 }
