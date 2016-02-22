@@ -31,11 +31,7 @@ public class ClientDAO extends AbstractDAO<Client> {
     }
 
     public Client create(Client client) {
-        unsetGroupe();
-        gdao.deleteAll();
-        Client c =  persist(client);
-        gdao.insertCluster();
-        return c;
+        return persist(client);
     }
 
     public List<Client> findAll() {
@@ -109,15 +105,23 @@ public class ClientDAO extends AbstractDAO<Client> {
         Optional<Client> oldClient = findById(id);
         if (oldClient.isPresent() && client.getAdresses() != null) {
             Adresse newAdresse = client.getAdresses().get(0);
-            int i = 0;
-            while (i < oldClient.get().getAdresses().size()) {
-                if (oldClient.get().getAdresses().get(i).getEnd() == newAdresse.getEnd()) {
-                    oldClient.get().getAdresses().set(i, newAdresse);
+            if(oldClient.get().getAdresses().size()>0){
+                int i = 0;
+                while (i < oldClient.get().getAdresses().size()) {
+                    if (oldClient.get().getAdresses().get(i).getEnd() == newAdresse.getEnd()) {
+                        oldClient.get().getAdresses().set(i, newAdresse);
+                    }
+                    i++;
                 }
-                i++;
+            } else {
+                oldClient.get().getAdresses().add(newAdresse);
             }
+
             persist(oldClient.get());
         }
+        unsetGroupe();
+        gdao.deleteAll();
+        gdao.insertCluster();
         return oldClient.get();
     }
 
