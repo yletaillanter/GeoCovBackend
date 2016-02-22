@@ -2,6 +2,7 @@ package resources;
 
 import com.google.common.base.Optional;
 import core.Adresse;
+import core.Client;
 import core.Groupe;
 import db.AdresseDAO;
 import db.ClientDAO;
@@ -10,6 +11,7 @@ import io.dropwizard.hibernate.UnitOfWork;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -55,10 +57,31 @@ public class GroupeResource {
     }
 
     @GET
-    @Path("/getCluster")
+    @Path("/initGroupe")
     @UnitOfWork
-    public List<Groupe> getClusters() {
+    public List<Groupe> initGroupe() {
         return dao.insertCluster();
+    }
+
+    @GET
+    @Path("/getCluster/{id}")
+    @UnitOfWork
+    public Groupe getGroupeByClientId(@PathParam("id") long id) {
+        List<Groupe> groupes = dao.findAll();
+
+        Iterator<Groupe> itGroupe = groupes.iterator();
+
+        while (itGroupe.hasNext()) {
+            Groupe groupe= itGroupe.next();
+            Iterator<Client> itClient = groupe.getClients().iterator();
+
+            while (itClient.hasNext()) {
+                if(id == itClient.next().getId()){
+                    return groupe;
+                }
+            }
+        }
+        return null;
     }
 
     @GET

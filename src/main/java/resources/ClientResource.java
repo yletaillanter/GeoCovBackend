@@ -51,7 +51,6 @@ public class ClientResource {
         } else {
             Client clientCreated = dao.create(client);
             return Response.ok(clientCreated).type(MediaType.APPLICATION_JSON).build();
-
         }
     }
 
@@ -111,12 +110,12 @@ public class ClientResource {
         // Adresse 4
         Adresse adresse4 = new Adresse("9", "Rue Jean Delourmel", "35200", "Rennes", false);
         adresse4.setLatitude("48.095914");
-        adresse4.setLongitude("-1.648769");
+        adresse4.setLongitude("-1.748769");
 
         // Adresse 5
-        Adresse adresse5 = new Adresse("20", "Avenue des Buttes de Coesmes", "35708", "Rennes", false);
+        Adresse adresse5 = new Adresse("1", "Avenue des Buttes de Coesmes", "35708", "Rennes", false);
         adresse5.setLatitude("48.120825");
-        adresse5.setLongitude("-1.635739");
+        adresse5.setLongitude("-1.835739");
 
         // Adresse 6
         Adresse adresse6 = new Adresse("20", "Avenue des Buttes de Coesmes", "35708", "Rennes", false);
@@ -126,17 +125,17 @@ public class ClientResource {
         // Adresse 7
         Adresse adresse7 = new Adresse("20", "Avenue des Buttes de Coesmes", "35708", "Rennes", false);
         adresse7.setLatitude("48.110825");
-        adresse7.setLongitude("-1.635739");
+        adresse7.setLongitude("-1.678739");
 
         // Adresse 8
         Adresse adresse8 = new Adresse("20", "Avenue des Buttes de Coesmes", "35708", "Rennes", false);
         adresse8.setLatitude("48.170825");
-        adresse8.setLongitude("-1.605739");
+        adresse8.setLongitude("-1.235739");
 
         // Adresse 9
         Adresse adresse9 = new Adresse("20", "Avenue des Buttes de Coesmes", "35708", "Rennes", false);
         adresse9.setLatitude("48.100825");
-        adresse9.setLongitude("-1.675739");
+        adresse9.setLongitude("-1.435739");
 
 
         // Adresse Arrivé
@@ -235,7 +234,7 @@ public class ClientResource {
         // adresse11
         Adresse adresse11 = new Adresse("12", "Rue du Houx", "35700", "Rennes", false);
         adresse11.setLatitude("48.131177");
-        adresse11.setLongitude("-1.664828");
+        adresse11.setLongitude("-1.694828");
 
         // adresse12
         Adresse adresse12 = new Adresse("23", "Rue de Locmariaquer", "35700", "Rennes", false);
@@ -245,12 +244,12 @@ public class ClientResource {
         // adresse13
         Adresse adresse13 = new Adresse("6", "Rue Raoul Anthony", "35700", "Rennes", false);
         adresse13.setLatitude("48.124782");
-        adresse13.setLongitude("-1.673828");
+        adresse13.setLongitude("-1.633828");
 
         // adresse14
         Adresse adresse14 = new Adresse("20", "Avenue des Buttes de Coesmes", "35700", "Rennes", false);
         adresse14.setLatitude("48.120825");
-        adresse14.setLongitude("-1.635739");
+        adresse14.setLongitude("-1.690739");
 
         // Adresse 6
         Adresse adresse15 = new Adresse("5", "Rue de Vincennes", "35700", "Rennes", false);
@@ -265,7 +264,7 @@ public class ClientResource {
         // Adresse 8
         Adresse adresse17 = new Adresse("15", "Boulevard de Sévigné", "35700", "Rennes", false);
         adresse17.setLatitude("48.116380");
-        adresse17.setLongitude("-1.672404");
+        adresse17.setLongitude("-1.645404");
 
         // Adresse 9
         Adresse adresse18 = new Adresse("23", "Rue de la Palestine", "35700", "Rennes", false);

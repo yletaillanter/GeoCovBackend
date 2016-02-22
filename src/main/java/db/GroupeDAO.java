@@ -88,6 +88,7 @@ public class GroupeDAO extends AbstractDAO<Groupe> {
         return lGroupe;
     }
 
+
     public Groupe getByClient(long id) {
         Optional<Client> cli = cdao.findById(id);
         if (cli.isPresent()) {

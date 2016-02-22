@@ -12,7 +12,11 @@ import java.util.List;
         @NamedQuery(
                 name = "Groupe.findAll",
                 query = "SELECT g FROM Groupe g"
-        )
+        ),
+        @NamedQuery(
+        name = "Groupe.deleteTable",
+        query = "DELETE FROM Groupe g"
+)
 })
 public class Groupe {
 
