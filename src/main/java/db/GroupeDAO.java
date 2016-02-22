@@ -33,6 +33,10 @@ public class GroupeDAO extends AbstractDAO<Groupe> {
         return list(namedQuery("Groupe.findAll"));
     }
 
+    public void deleteAll() {
+        namedQuery("Groupe.deleteTable").executeUpdate();
+    }
+
     /**
      * Fonction permettant de transformer un cluster en liste de groupe
      * @return List<Groupe></Groupe>
@@ -101,7 +105,6 @@ public class GroupeDAO extends AbstractDAO<Groupe> {
         // On renvoie la liste des groupes
         return lGroupe;
     }
-
 
     public Groupe getByClient(long id) {
         Optional<Client> cli = cdao.findById(id);

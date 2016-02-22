@@ -16,7 +16,7 @@ import java.util.List;
         @NamedQuery(
         name = "Groupe.deleteTable",
         query = "DELETE FROM Groupe g"
-)
+        )
 })
 public class Groupe {
 

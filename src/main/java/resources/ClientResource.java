@@ -363,4 +363,12 @@ public class ClientResource {
     public String testDistance() {
         return dao.getCluster().toString();
     }
+
+    // TEST
+    @GET
+    @Path("/unsetGroupe")
+    @UnitOfWork
+    public void unsetGroupe() {
+        dao.unsetGroupe();
+    }
 }

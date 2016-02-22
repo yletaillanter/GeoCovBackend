@@ -15,8 +15,15 @@ import java.util.*;
  * Created by tidus on 08/01/2016.
  */
 public class ClientDAO extends AbstractDAO<Client> {
+
+    private GroupeDAO gdao;
+
     public ClientDAO(SessionFactory sessionFactory) {
         super(sessionFactory);
+    }
+
+    public void setGdao(GroupeDAO gdao) {
+        this.gdao = gdao;
     }
 
     public Optional<Client> findById(long id) {
@@ -24,11 +31,19 @@ public class ClientDAO extends AbstractDAO<Client> {
     }
 
     public Client create(Client client) {
-        return persist(client);
+        unsetGroupe();
+        gdao.deleteAll();
+        Client c =  persist(client);
+        gdao.insertCluster();
+        return c;
     }
 
     public List<Client> findAll() {
         return list(namedQuery("Client.findAll"));
+    }
+
+    public void unsetGroupe() {
+        namedQuery("Client.unsetGroupe").executeUpdate();
     }
 
     public Client findByEmail(String email) {

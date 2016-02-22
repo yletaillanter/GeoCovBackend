@@ -72,14 +72,17 @@ public class GeoCovApplication extends Application<GeoCovConfiguration> {
 
         // Add client Ressources
         final ClientDAO cdao = new ClientDAO(hibernateBundle.getSessionFactory());
-        environment.jersey().register(new ClientResource(cdao));
 
         // Add groupe Ressources
         final AdresseDAO adao = new AdresseDAO(hibernateBundle.getSessionFactory());
-        environment.jersey().register(new AdresseResource(adao));
 
         // Add groupe Ressources
         final GroupeDAO gdao = new GroupeDAO(hibernateBundle.getSessionFactory(), cdao);
+        cdao.setGdao(gdao);
+
+        // On enregistre les DAO dans l'environnement
+        environment.jersey().register(new AdresseResource(adao));
+        environment.jersey().register(new ClientResource(cdao));
         environment.jersey().register(new GroupeResource(gdao));
 
         final TemplateHealthCheck healthCheck =

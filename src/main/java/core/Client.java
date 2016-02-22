@@ -15,12 +15,16 @@ import java.util.List;
 @Table(name = "client")
 @NamedQueries({
         @NamedQuery(
-                name = "Client.findAll",
-                query = "SELECT c FROM Client c"
+            name = "Client.findAll",
+            query = "SELECT c FROM Client c"
         ),
         @NamedQuery(
-        name = "Client.findByEmail",
-        query = "SELECT c FROM Client c WHERE c.email = :email"
+            name = "Client.findByEmail",
+            query = "SELECT c FROM Client c WHERE c.email = :email"
+        ),
+        @NamedQuery(
+            name = "Client.unsetGroupe",
+            query = "UPDATE Client c SET c.groupe = NULL"
         )
 })
 public class Client implements Principal{

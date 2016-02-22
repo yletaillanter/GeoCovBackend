@@ -90,4 +90,11 @@ public class GroupeResource {
     public Groupe getByClient(@PathParam("id") long idClient) {
         return dao.getByClient(idClient);
     }
+
+    @GET
+    @Path("/delete")
+    @UnitOfWork
+    public void delete() {
+        dao.deleteAll();
+    }
 }
