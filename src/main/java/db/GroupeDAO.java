@@ -1,8 +1,6 @@
 package db;
 
 import com.google.common.base.Optional;
-import com.google.common.collect.Iterators;
-import core.Adresse;
 import core.Client;
 import core.Groupe;
 import io.dropwizard.hibernate.AbstractDAO;
@@ -70,6 +68,22 @@ public class GroupeDAO extends AbstractDAO<Groupe> {
                 if(cli.isPresent()) {
                     // On récupère le client
                     Client c = cli.get();
+                    // Si les coordonnées du point central sont null alors on les set avec les coordonnées du client
+                    if (gAdd.getLatMidPoint() == null && gAdd.getLongMidPoint() == null) {
+                        gAdd.setLatMidPoint(c.getAdresses().get(0).getLatitude());
+                        gAdd.setLongMidPoint(c.getAdresses().get(0).getLongitude());
+                        gAdd.setLatDest(c.getAdresses().get(1).getLatitude());
+                        gAdd.setLongDest(c.getAdresses().get(1).getLongitude());
+                    }
+                    // Sinon on calcule le nouveau point central entre le point central et le client
+                    else {
+                        gAdd.calculateMidPoint(
+                            Double.parseDouble(gAdd.getLatMidPoint()),
+                            Double.parseDouble(gAdd.getLongMidPoint()),
+                            Double.parseDouble(c.getAdresses().get(0).getLatitude()),
+                            Double.parseDouble(c.getAdresses().get(0).getLongitude())
+                        );
+                    }
                     // On l'ajoute a notre liste de client
                     listCli.add(cli.get());
                     // On set le groupe à notre client

@@ -23,11 +23,19 @@ public class Groupe {
     private long id;
     private List<Client> clients;
     private boolean verrouillage;
+    private String latMidPoint;
+    private String longMidPoint;
+    private String latDest;
+    private String longDest;
 
-    public Groupe() {}
+    public Groupe() {
+        this.latMidPoint = null;
+        this.longMidPoint = null;
+    }
 
     public Groupe(List<Client> clients) {
-        this.clients = clients;
+        this.latMidPoint = null;
+        this.longMidPoint = null;
     }
 
     @Id
@@ -38,6 +46,38 @@ public class Groupe {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getLatMidPoint() {
+        return latMidPoint;
+    }
+
+    public void setLatMidPoint(String latMidPoint) {
+        this.latMidPoint = latMidPoint;
+    }
+
+    public String getLongMidPoint() {
+        return longMidPoint;
+    }
+
+    public void setLongMidPoint(String longMidPoint) {
+        this.longMidPoint = longMidPoint;
+    }
+
+    public String getLatDest() {
+        return latDest;
+    }
+
+    public void setLatDest(String latDest) {
+        this.latDest = latDest;
+    }
+
+    public String getLongDest() {
+        return longDest;
+    }
+
+    public void setLongDest(String longDest) {
+        this.longDest = longDest;
     }
 
     @OneToMany(mappedBy = "groupe", fetch = FetchType.EAGER)
@@ -58,4 +98,21 @@ public class Groupe {
         this.verrouillage = verrouillage;
     }
 
+    public void calculateMidPoint(double lat1,double lon1,double lat2,double lon2){
+
+        double dLon = Math.toRadians(lon2 - lon1);
+
+        //convert to radians
+        lat1 = Math.toRadians(lat1);
+        lat2 = Math.toRadians(lat2);
+        lon1 = Math.toRadians(lon1);
+
+        double Bx = Math.cos(lat2) * Math.cos(dLon);
+        double By = Math.cos(lat2) * Math.sin(dLon);
+        double lat3 = Math.atan2(Math.sin(lat1) + Math.sin(lat2), Math.sqrt((Math.cos(lat1) + Bx) * (Math.cos(lat1) + Bx) + By * By));
+        double lon3 = lon1 + Math.atan2(By, Math.cos(lat1) + Bx);
+
+        setLatMidPoint(String.valueOf(Math.toDegrees(lat3)));
+        setLongMidPoint(String.valueOf(Math.toDegrees(lon3)));
+    }
 }
