@@ -149,7 +149,7 @@ public class ClientDAO extends AbstractDAO<Client> {
             for (HashMap.Entry<Long, Double> hash2 : mChildrens.entrySet()) {
                 Long max;
                 //  si vide on ajoute de suite
-                if (cluster.size() < 3) {
+                if (cluster.size() < 3 && hash2.getValue()<3000) {
                     if(clusters.isEmpty()) {
                         cluster.add(hash2.getKey());
                     } else {
