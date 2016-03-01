@@ -107,11 +107,19 @@ public class ClientDAO extends AbstractDAO<Client> {
             Adresse newAdresse = client.getAdresses().get(0);
             if(oldClient.get().getAdresses().size()>0){
                 int i = 0;
+                boolean work = false;
                 while (i < oldClient.get().getAdresses().size()) {
                     if (oldClient.get().getAdresses().get(i).getEnd() == newAdresse.getEnd()) {
                         oldClient.get().getAdresses().set(i, newAdresse);
                     }
+                    work = (oldClient.get().getAdresses().get(i).getEnd() == newAdresse.getEnd());
+                    if (work) {
+                        break;
+                    }
                     i++;
+                }
+                if (!work) {
+                    oldClient.get().getAdresses().add(newAdresse);
                 }
             } else {
                 oldClient.get().getAdresses().add(newAdresse);
